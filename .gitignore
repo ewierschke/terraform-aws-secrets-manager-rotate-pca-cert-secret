@@ -26,3 +26,5 @@ builds/
 
 venv/
 stash/
+
+mise.toml

@@ -55,20 +55,12 @@ module "lambda" {
   ]
 
   environment_variables = {
-    LOG_LEVEL                     = var.log_level
-    DRY_RUN                       = var.dry_run
-    PCA_ARN = 
-    COMMON_NAME = 
-    SANS = 
-    VALIDITY_DAYS =
-    
-    # SES_SMTP_ENDPOINT             = var.ses_smtp_endpoint
-    # NOTIFICATION_SENDER_EMAIL     = var.notification_sender_email
-    # NOTIFICATION_RECIPIENT_EMAIL  = var.notification_recipient_email
-    # SMTP_IAM_USERNAME             = var.smtp_iam_username
-    # SSM_ROTATION_DOCUMENT_NAME    = var.ssm_rotation_document_name
-    # SSM_ROTATE_ON_EC2_INSTANCE_ID = var.ssm_rotate_on_ec2_instance_id
-    # SNS_TOPIC_ARN                 = aws_sns_topic.rotation_notifications.arn
+    LOG_LEVEL     = var.log_level
+    DRY_RUN       = var.dry_run
+    PCA_ARN       = var.pca_arn_for_lambda_policy
+    COMMON_NAME   = var.cert_common_name
+    SANS          = var.cert_list_of_sans
+    VALIDITY_DAYS = var.cert_validitiy_days
   }
 }
 

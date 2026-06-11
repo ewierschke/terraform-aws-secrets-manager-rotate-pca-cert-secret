@@ -63,6 +63,22 @@ variable "pca_arn_for_lambda_policy" {
   type        = string
 }
 
+variable "cert_common_name" {
+  description = "CN of certificate to request"
+  type        = string
+}
+
+variable "cert_list_of_sans" {
+  description = "ARN of the PCA to request cert from"
+  type        = optional(list(string))
+}
+
+variable "cert_validitiy_days" {
+  description = "ARN of the PCA to request cert from"
+  type        = number
+  default     = 365
+}
+
 variable "attach_to_vpc_id" {
   description = "VPC ID to attach lambda function to, if empty string provided, function won't be attached to any VPC"
   type        = string
