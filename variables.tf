@@ -70,7 +70,8 @@ variable "cert_common_name" {
 
 variable "cert_list_of_sans" {
   description = "ARN of the PCA to request cert from"
-  type        = optional(list(string))
+  type        = list(string)
+  default     = []
 }
 
 variable "cert_validitiy_days" {
