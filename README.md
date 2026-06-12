@@ -62,7 +62,7 @@ label/stage in order for future builds/rotations to retrieve the proper value.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.74 |
 
 ## Providers
@@ -73,7 +73,31 @@ label/stage in order for future builds/rotations to retrieve the proper value.
 
 ## Resources
 
+| Name | Type |
+|------|------|
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+| [aws_subnets.private_subnets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
+| [aws_vpc.attach_to_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_cert_common_name"></a> [cert\_common\_name](#input\_cert\_common\_name) | CN of certificate to request | `string` | n/a | yes |
+| <a name="input_pca_arn_for_lambda_policy"></a> [pca\_arn\_for\_lambda\_policy](#input\_pca\_arn\_for\_lambda\_policy) | ARN of the PCA to request cert from | `string` | n/a | yes |
+| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name to prefix resources with | `string` | n/a | yes |
+| <a name="input_secret_arn_for_lambda_policy"></a> [secret\_arn\_for\_lambda\_policy](#input\_secret\_arn\_for\_lambda\_policy) | ARN of the secret to be configured for rotation, this is used to allow the lambda function to access only this secret | `string` | n/a | yes |
+| <a name="input_attach_to_vpc_explicit_list_of_subnet_ids"></a> [attach\_to\_vpc\_explicit\_list\_of\_subnet\_ids](#input\_attach\_to\_vpc\_explicit\_list\_of\_subnet\_ids) | List of subnet IDs to attach lambda function to, if empty list provided, function will try to discover subnets with name containing private within the provided VPC id | `list(string)` | `[]` | no |
+| <a name="input_attach_to_vpc_id"></a> [attach\_to\_vpc\_id](#input\_attach\_to\_vpc\_id) | VPC ID to attach lambda function to, if empty string provided, function won't be attached to any VPC | `string` | `""` | no |
+| <a name="input_cert_list_of_sans"></a> [cert\_list\_of\_sans](#input\_cert\_list\_of\_sans) | ARN of the PCA to request cert from | `list(string)` | `[]` | no |
+| <a name="input_cert_validitiy_days"></a> [cert\_validitiy\_days](#input\_cert\_validitiy\_days) | ARN of the PCA to request cert from | `number` | `365` | no |
+| <a name="input_dry_run"></a> [dry\_run](#input\_dry\_run) | Boolean toggle to control the dry-run mode of the lambda function | `bool` | `true` | no |
+| <a name="input_lambda"></a> [lambda](#input\_lambda) | Object of optional attributes passed on to the lambda module | <pre>object({<br/>    artifacts_dir                     = optional(string, "builds")<br/>    build_in_docker                   = optional(bool, false)<br/>    cloudwatch_logs_retention_in_days = optional(number, 365)<br/>    create_package                    = optional(bool, true)<br/>    ephemeral_storage_size            = optional(number)<br/>    ignore_source_code_hash           = optional(bool, true)<br/>    local_existing_package            = optional(string)<br/>    logging_log_group                 = optional(string, null)<br/>    memory_size                       = optional(number, 128)<br/>    recreate_missing_package          = optional(bool, false)<br/>    runtime                           = optional(string, "python3.12")<br/>    s3_bucket                         = optional(string)<br/>    s3_existing_package               = optional(map(string))<br/>    s3_prefix                         = optional(string)<br/>    store_on_s3                       = optional(bool, false)<br/>    timeout                           = optional(number, 300)<br/>    tracing_mode                      = optional(string, "PassThrough")<br/>    use_existing_cloudwatch_log_group = optional(bool, false)<br/>  })</pre> | `{}` | no |
+| <a name="input_log_level"></a> [log\_level](#input\_log\_level) | Log level for lambda | `string` | `"INFO"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags for resource | `map(string)` | `{}` | no |
 
 ## Outputs
 
