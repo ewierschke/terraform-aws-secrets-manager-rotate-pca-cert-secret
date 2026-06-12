@@ -59,7 +59,7 @@ module "lambda" {
     DRY_RUN       = var.dry_run
     PCA_ARN       = var.pca_arn_for_lambda_policy
     COMMON_NAME   = var.cert_common_name
-    SANS          = var.cert_list_of_sans
+    SANS          = jsonencode(var.cert_list_of_sans)
     VALIDITY_DAYS = var.cert_validitiy_days
   }
 }
